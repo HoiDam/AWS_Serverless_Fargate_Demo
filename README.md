@@ -1,7 +1,7 @@
 # AWS_Serverless_Walkthrough  
 - This repo would mainly include build a serverless environment with aws lambda and aws fargate. 
 - Purpose : lower the cost  
-- This demo would be setting up an API to store some random data in MySQL DB (aws RDS)
+- This demo would be setting up an API to store some random data in aws RDS (MySQL)
 ```
 - Flow :  | Client enter url  
                     |── Call ──> aws API Gateway  
@@ -12,6 +12,78 @@
 ```
 
 ## Fargate
+### 1. Prepare docker container 
+- Package the code with docker framework   
+- Two choices to push container to public
+  1. Dockerhub 
+  ref: [HoiDam/PythonIPYNB_Playground](https://github.com/HoiDam/PythonIPYNB_Playground#guide-docker-environment-required-)
+  2. AWS ECR
+  No ref here . Not yet tried
+### 2. Create Task Definitions
+Setup procedure:
+1. Enter the front page of AWS ECS 
+2. Go to Task Definitions
+3. Create new Task Defintion
+4. Choose Fargate
+5. Type your task definition name
+6. Go to Container Defintions and click "Add container"
+7. Click Create
+### 3. Create Clusters
+Setup procedure:
+1. Go to Clusters
+2. Click "Networking only" and "next step"
+3. Type your cluster name 
+4. Click create
+### 4. Generate keys for the program
+Setup procedure:
+1. Go to AWS IAM
+2. Go to Users
+3. Click "Add user"
+4. Enter Username
+5. Choose access type : Programmatic access
+6. Choose attach exisiting policies directly and choose belows policy
+> AmazonECS_FullAccess
+7. Skip all next and Click Create user
+8. Click the user that you created
+9. Go to security credentials
+10. Create access key
+11. Copy the keys to your secret file (DO NOT EXPOSE IT)
+### 5. Prepare the code to trigger the created task
+- using boto3/pymysql library  
+- create client connection  
+```
+client=boto3.client("ecs",  
+                aws_access_key_id=key,   
+                aws_secret_access_key=pw,   
+                region_name="ap-east-1"  
+                )
+```  
+Access + Secret keys = The keys which saved in secret file  
+Region name = Current AWS Region code (E.g ap-east-1) 
+```
+response = client.run_task(
+        cluster='fargatetest', # name of the cluster
+        launchType = 'FARGATE',
+        taskDefinition='fargatetest:1', # replace with your task definition name and revision
+        count = 1,
+        platformVersion='LATEST',
+        networkConfiguration={
+                'awsvpcConfiguration': {
+                    'subnets': [
+                        'subnet-0a4883972779b39f0', # replace with your public subnet or a private with NAT
+                        'subnet-0859ee113a1cb9e21' # Second is optional, but good idea to have two
+                    ],
+                    'securityGroups':[
+                        'sg-03dd8dbd6fae4a8ed'
+                    ],
+                    'assignPublicIp': 'ENABLED', # dockerhub container : enabled ; aws ECR : disabled 
+                }
+            }   
+    )
+```
+cluster = The cluster name you created  
+taskDefinition = The task definition name you created  
+vpcConfiguration = same subnets with aws RDS  
 
 ## Lambda 
 Credit : BWong951

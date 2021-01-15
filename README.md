@@ -87,7 +87,7 @@ vpcConfiguration = same subnets with aws RDS
 
 ---
 ## Lambda 
-Credit : BWong951
+Credit : [Bwong951](https://github.com/Brian951)
 ### 1. Prepare code with aws lambda environemnt
 `server.py` is an aws lambda written for local testing  
 `python server.py` to test your code written in `lambda_handler.py`

@@ -10,7 +10,7 @@
                                                  |── Trigger --> aws fargate  
                                                                  |── Insert random data --> DB  
 ```
-
+---
 ## Fargate
 ### 1. Prepare docker container 
 - Package the code with docker framework   
@@ -84,7 +84,7 @@ response = client.run_task(
 cluster = The cluster name you created  
 taskDefinition = The task definition name you created  
 vpcConfiguration = same subnets with aws RDS  
-
+---
 ## Lambda 
 Credit : BWong951
 ### 1. Prepare code with aws lambda environemnt
@@ -143,4 +143,5 @@ Setup procedure (HTTP API):
           
 ### 6. Upload the codes to lambda
 As lambda do not provide a server to install packages . Upload the codes with libraries file is needed .  
-Remarks: There is limit on upload file size 10MB . If greater , push it to aws s3 first then link url.  
+Remarks:  
+There is limit on upload file size 10MB . If greater , push it to aws s3 first then link url.  

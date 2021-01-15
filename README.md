@@ -2,13 +2,14 @@
 - This repo would mainly include build a serverless environment with aws lambda and aws fargate. 
 - Purpose : lower the cost  
 - This demo would be setting up an API to store some random data in aws RDS (MySQL)
+- Flow :  
 ```
-- Flow :  | Client enter url  
-                    |── Call ──> aws API Gateway  
-                                 |── Trigger ──> aws lambda 
-                                                 |── Insert random data --> DB  
-                                                 |── Trigger --> aws fargate  
-                                                                 |── Insert random data --> DB  
+| Client enter url  
+        |── Call ──> aws API Gateway  
+                     |── Trigger ──> aws lambda 
+                                     |── Insert random data --> DB  
+                                     |── Trigger --> aws fargate  
+                                                     |── Insert random data --> DB  
 ```
 ---
 ## Fargate
@@ -20,6 +21,7 @@
   2. AWS ECR
   No ref here . Not yet tried
 ### 2. Create Task Definitions
+- Task Definitions would store your pull your container file every task get triggered
 Setup procedure:
 1. Enter the front page of AWS ECS 
 2. Go to Task Definitions
@@ -29,12 +31,15 @@ Setup procedure:
 6. Go to Container Defintions and click "Add container"
 7. Click Create
 ### 3. Create Clusters
+- Clusters would be an area to store all your tasks run and save the logs
 Setup procedure:
 1. Go to Clusters
 2. Click "Networking only" and "next step"
 3. Type your cluster name 
 4. Click create
-### 4. Generate keys for the program
+### 4. Generate keys 
+- Get the aws access keys for the program to run
+- Need certain permissions
 Setup procedure:
 1. Go to AWS IAM
 2. Go to Users

@@ -75,11 +75,11 @@ response = client.run_task(
         networkConfiguration={
                 'awsvpcConfiguration': {
                     'subnets': [
-                        'subnet-0a4883972779b39f0', # replace with your public subnet or a private with NAT
-                        'subnet-0859ee113a1cb9e21' # Second is optional, but good idea to have two
+                        'subnet-123456', # replace with your public subnet or a private with NAT
+                        'subnet-233456' # Second is optional, but good idea to have two
                     ],
                     'securityGroups':[
-                        'sg-03dd8dbd6fae4a8ed'
+                        'sg-123456'
                     ],
                     'assignPublicIp': 'ENABLED', # dockerhub container : enabled ; aws ECR : disabled 
                 }

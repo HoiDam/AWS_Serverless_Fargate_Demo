@@ -83,7 +83,8 @@ response = client.run_task(
 ```
 cluster = The cluster name you created  
 taskDefinition = The task definition name you created  
-vpcConfiguration = same subnets with aws RDS  
+vpcConfiguration = same subnets with aws RDS 
+
 ---
 ## Lambda 
 Credit : BWong951

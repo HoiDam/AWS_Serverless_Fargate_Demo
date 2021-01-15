@@ -150,4 +150,4 @@ Setup procedure (HTTP API):
 ### 6. Upload the codes to lambda
 As lambda do not provide a server to install packages . Upload the codes with libraries file is needed .  
 Remarks:  
-There is limit on upload file size 10MB . If greater , push it to aws s3 first then link url.  
+> There is limit on upload file size 10MB . If greater , push it to aws s3 first then link url.  

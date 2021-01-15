@@ -1,5 +1,5 @@
 # AWS_Serverless_Walkthrough  
-- This repo would mainly include build a serverless environment with aws lambda and aws fargate. 
+- This repo would mainly include building a serverless environment with aws lambda and aws fargate. 
 - Purpose : lower the cost  
 - This demo would be setting up an API to store some random data in aws RDS (MySQL)
 - Flow :  
